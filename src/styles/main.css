@@ -1,10 +1,52 @@
-p {
-    font-weight: bold;
+
+body { 
+    display: grid;
+    grid-template-areas: 
+    "header header header"
+    "nav article projectTree"
+    "footer footer footer";
+    grid-template-rows: 80px 1fr 70px;  
+    grid-template-columns: 15% 1fr 15%;
+    grid-row-gap: 10px;
+    grid-column-gap: 10px;
+    height: 100vh;
+    margin: 0;
 }
 div {
-    font-size: 60px;
+    background-color: lightsalmon;
 }
-
-.wtf {
-    border: 3px solid black;
+header, footer, article, nav{
+    padding: 1.2em;
+    background: lightsalmon;
+}
+#pageHeader {
+    grid-area: header;
+}
+#pageFooter {
+    grid-area: footer;
+}
+#mainArticle { 
+    grid-area: article;      
+}
+#mainNav { 
+    grid-area: nav; 
+}
+#projectTree { 
+    grid-area: projectTree; 
+} 
+/* Stack the layout on small devices/viewports. */
+@media all and (max-width: 575px) {
+    body { 
+        grid-template-areas: 
+        "header"
+        "article"
+        "projectTree"
+        "nav"
+        "footer";
+        grid-template-rows: 80px 1fr 70px 1fr 70px;  
+        grid-template-columns: 1fr;
+    }
+}
+.navTaskDiv,.projectsDiv {
+    display: flex;
 }
