@@ -29,5 +29,8 @@
   "bugs": {
     "url": "https://github.com/MikeTanner/Todo-List/issues"
   },
-  "homepage": "https://github.com/MikeTanner/Todo-List#readme"
+  "homepage": "https://github.com/MikeTanner/Todo-List#readme",
+  "dependencies": {
+    "@mdi/font": "^7.0.96"
+  }
 }

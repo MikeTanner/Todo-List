@@ -1,72 +1,27 @@
 import "./styles/main.css"
+import {Task,Project} from "./ProjectTaskFactory";
 console.log("test");
 
-const Project= (name) => {
-    let taskList =[];
-    const changeName=(newName) => {
-        name = newName;
-    }
-    const getName = () => {
-        return name;
-    }
-    const getTasks = () => {
-        return taskList;
-    }
-    const addTask = (task) => {
-        taskList.push(task);
-    }
-    const removeTask = (index) => {
-        taskList.splice(index,1);
+//siteLogic()
+    //stores current tab state, whether form is active, etc.
+    //siteLogic.startup() => domInteract? domInteract function is called whenever something is clicked?
+//domCreate() => add event listeners to all appropriate buttons, modify the visual dom stuff
+    //only called by domLogic?
+
+
+//add project side button adds/removes form on side bar to enter new project name
+//clicking project fills middle with all tasks frmo that project with an add task button
+//all tasks button draws all tasks onto middle dom
+
+const currentTab = (() => {
+    let page = "";
+    const updatePage = (newPage) => {
+        page = newPage;
     }
     return {
-        changeName,
-        getName,
-        getTasks,
-        addTask,
-        removeTask
+        getTab() {
+            return page;
+        },
+        updatePage
     }
-}
-
-const Task = (title,dueDate, description="") => {
-    let completed = false;
-    const changeTitle = (newTitle) => {
-        title =newTitle; 
-    }
-    const changeDueDate = (newDate) => {
-        dueDate = newDate;
-    }
-    const changeDescription = (newD) => {
-        description = newD;
-    }
-    const changeStatus = () => {
-        if (completed) {
-            completed = false;
-        }
-        else {
-            completed = true;
-        }
-    }
-    const getTitle = () => {
-        return title;
-    }
-    const getDueDate = () => {
-        return dueDate
-    }
-    const getDescription = () => {
-        return description
-    }
-    const getCompleted = () => {
-        return completed;
-    }
-    return {
-        changeDescription,
-        changeDueDate,
-        changeStatus,
-        changeTitle,
-        getCompleted,
-        getDescription,
-        getDueDate,
-        getTitle
-    }
-    }
-
+})()
