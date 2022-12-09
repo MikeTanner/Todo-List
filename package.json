@@ -13,6 +13,7 @@
     "url": "git+https://github.com/MikeTanner/Todo-List.git"
   },
   "devDependencies": {
+    "@mdi/font": "^7.0.96",
     "css-loader": "^6.7.2",
     "html-webpack-plugin": "^5.5.0",
     "sass": "^1.56.1",
@@ -29,8 +30,5 @@
   "bugs": {
     "url": "https://github.com/MikeTanner/Todo-List/issues"
   },
-  "homepage": "https://github.com/MikeTanner/Todo-List#readme",
-  "dependencies": {
-    "@mdi/font": "^7.0.96"
-  }
+  "homepage": "https://github.com/MikeTanner/Todo-List#readme"
 }

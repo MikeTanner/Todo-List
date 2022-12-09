@@ -1,4 +1,6 @@
-
+*, *::before, *::after {
+    box-sizing: border-box;
+}
 body { 
     display: grid;
     grid-template-areas: 
@@ -19,6 +21,11 @@ header, footer, article, nav{
     padding: 1.2em;
     background: lightsalmon;
 }
+img,picture,svg,video {
+    max-width: 100%;
+    display: block;
+}
+
 #pageHeader {
     grid-area: header;
 }
@@ -47,6 +54,6 @@ header, footer, article, nav{
         grid-template-columns: 1fr;
     }
 }
-.navTaskDiv,.projectsDiv {
+.navTaskDiv,.projectsDiv,.addProject {
     display: flex;
 }

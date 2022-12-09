@@ -1,7 +1,7 @@
 import "./styles/main.css"
-import {Task,Project} from "./ProjectTaskFactory";
+import {displayHandler} from "./displayHandler.js";
 console.log("test");
-
+displayHandler.startup();
 //siteLogic()
     //stores current tab state, whether form is active, etc.
     //siteLogic.startup() => domInteract? domInteract function is called whenever something is clicked?
@@ -13,15 +13,4 @@ console.log("test");
 //clicking project fills middle with all tasks frmo that project with an add task button
 //all tasks button draws all tasks onto middle dom
 
-const currentTab = (() => {
-    let page = "";
-    const updatePage = (newPage) => {
-        page = newPage;
-    }
-    return {
-        getTab() {
-            return page;
-        },
-        updatePage
-    }
-})()
+
