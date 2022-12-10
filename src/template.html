@@ -8,11 +8,36 @@
 </head>
 <body>
     <header id="pageHeader">Header</header>
-    <article id="mainArticle">Article
-        <div>
-            test
+    <article id="mainArticle">
+        <div id="listContainer"></div>
+        <div id="formContainer">
+            <div class="addTaskContainer">
+                <button class ="showButton formHide">New Task</button>
+                <form class="taskForm formHide form-style-9" id="userInput">
+                    <ul>
+                        <li>
+                            <input type="text" id = "inputTaskName" name="field1" class="field-style field-split align-left" placeholder="Task Name" />
+                        
+                        </li>
+                        <li>
+                            <input type="text" id = "inputProject"name="field3" class="field-style field-split align-left" placeholder="Project?" />
+                        </li>
+                        <li>
+                        <input type="text" id = "inputDueDate"name="field3" class="field-style field-full align-none" placeholder="Due Date" />
+                        </li>
+                        <li>
+                        <textarea name="field5"id = "inputDescription" class="field-style" placeholder="Description"></textarea>
+                        </li>
+                        <li>
+                            <input type="submit" value="Add Task" id="submitNewTask" />
+                        </li>
+                        </ul>
+                </form>
+                <!-- top section will be a form +button to add new book -->
+            </div>
         </div>
     </article>
+
     <nav id="mainNav">
         <div id="allTasks">
             <h3>All Tasks</h3>

@@ -10,6 +10,9 @@ const siteController = (() => {
 
     }
     const add = (formData) => {
+        let genId=makeid(7);
+        taskList.push(Task(formData[0],formData[1],formData[2],formData[3],genId));
+        return genId
         //return id to displayHandler
     }
     const makeid =(length) => {
@@ -45,7 +48,7 @@ const siteController = (() => {
 
 })()
 
-const Task = (title,dueDate, description="", project ="", id) => {
+const Task = (title,project ="",dueDate, description="", id) => {
 
     let completed = false;
     const changeTitle = (newTitle) => {
