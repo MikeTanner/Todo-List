@@ -14,12 +14,19 @@ body {
     height: 100vh;
     margin: 0;
 }
-div {
-    background-color: lightsalmon;
+.hellDiv {
+	display: flex;
+	justify-content: space-between;
+}
+#tasks:hover, #starred{ 
+    cursor: pointer;
 }
 header, footer, article, nav{
     padding: 1.2em;
     background: lightsalmon;
+}
+#projectTree {
+    background-color: lightsalmon;
 }
 img,picture,svg,video {
     max-width: 100%;
@@ -28,6 +35,9 @@ img,picture,svg,video {
 
 .formHide{ 
     display: none;
+}
+.deleteTaskBtn {
+	background-color: red;
 }
 
 #pageHeader {
@@ -63,14 +73,17 @@ img,picture,svg,video {
 }
 
 /* FORM STYLING IGNORE */
-.form-style-9{
-	max-width: 450px;
+.form-style-9, .taskDiv{
 	background: #FAFAFA;
 	padding: 30px;
-	margin: 50px auto;
+	margin: 30px;
 	box-shadow: 1px 1px 25px rgba(0, 0, 0, 0.35);
 	border-radius: 10px;
 	border: 6px solid #305A72;
+}
+.form-style-9 {
+    max-width: 450px;
+
 }
 .form-style-9 ul{
 	padding:0;

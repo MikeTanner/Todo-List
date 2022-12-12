@@ -48,7 +48,7 @@ const displayHandler = (() => {
         else if (showBtn.textContent =="Cancel") {
             form.classList.add("formHide")
             showBtn.textContent = "New Task"
-        }
+        }})
         addTask.addEventListener("click", (event)=> {
             let taskId = "";
             let formArray = []
@@ -57,11 +57,16 @@ const displayHandler = (() => {
                 formArray = [document.getElementById("inputTaskName").value, document.getElementById("inputProject").value, document.getElementById("inputDueDate").value, document.getElementById("inputDescription").value]
                 //call siteHandler.add
                 taskId = siteController.add(formArray);
+                console.log(siteController.getTaskList());
                 
+                drawTask(taskId)
+                console.log("test");
+                
+                event.stopPropagation()
             }
         })
-    })
     }
+    
     const validateFormData = () => {
         return true;
     }
@@ -70,9 +75,70 @@ const displayHandler = (() => {
         //if type = project, reload project div
         //can be called by an event listener
     }
-    const drawTask = (classList)=>{
+    const drawTask = (taskId)=>{
+        const taskList = siteController.getTaskList();
+        const taskDiv = document.createElement("div")
+        const hellDiv = document.createElement("div")
+        taskDiv.classList.add("taskDiv")
+        taskDiv.id = taskId;
+        hellDiv.classList.add("hellDiv")
+        //left div contents
+        const leftDiv = document.createElement("div")
+        leftDiv.classList.add("leftTaskDiv") 
+        const checkDiv = document.createElement("div")
+        checkDiv.classList.add("checkDiv") 
+        checkDiv.classList.add("unchecked")
+        const titleDiv = document.createElement("div")
+        titleDiv.classList.add("taskTitleDiv")        
+        titleDiv.innerHTML = taskList[taskId].getTitle();
+
+        //right div contents
+        const rightDiv = document.createElement("div")
+        rightDiv.classList.add("rightTaskDiv") 
+        const detailsBtn = document.createElement("button")
+        detailsBtn.classList.add("detailsButton")
+        detailsBtn.innerHTML="Show More"
+        detailsBtn.addEventListener("click", event => expandDetails(event))
+        const deleteBtn = document.createElement("button") 
+        deleteBtn.innerHTML="X"
+        deleteBtn.classList.add("deleteTaskBtn")
+        deleteBtn.addEventListener("click", (event)=> deleteTask(event))
+        leftDiv.append(checkDiv,titleDiv);
+        rightDiv.append(detailsBtn, deleteBtn)
+        hellDiv.append(leftDiv,rightDiv)
+        taskDiv.append(hellDiv)
+        content.append(taskDiv)
 
         //universal createTask module
+    }
+    const deleteTask =(event)=> {
+        const taskTarget = event.target.parentNode.parentNode.parentNode;
+        const targetId = taskTarget.id
+        siteController.remove("task", targetId);
+        taskTarget.remove();
+
+    } 
+    const expandDetails =(event)=> {
+        const taskTarget = event.target.parentNode.parentNode.parentNode;
+        const targetId = taskTarget.id
+        const buttonType = event.target.innerHTML;
+
+        if (buttonType =="Show More") {
+            const description = document.createElement("div")
+            description.classList.add("moreInfo")
+            description.innerHTML = siteController.getTaskList()[targetId].getDescription()
+            event.target.innerHTML = "Show Less"
+            taskTarget.append(description)   
+        }
+        else if (buttonType == "Show Less") {
+            taskTarget.removeChild(taskTarget.querySelector(".moreInfo"));
+            event.target.innerHTML = "Show More"
+        }
+
+
+
+        console.log(targetId);
+        event.stopPropagation;
     }
     const drawTab = (classList) => {
         //draw one of three titles
@@ -80,12 +146,13 @@ const displayHandler = (() => {
         const titleDiv = document.createElement("div")
         titleDiv.classList.add("title")
         if (classList.contains("taskNav")) {
-            titleDiv.innerText = "All Tasks"
+            titleDiv.innerText = ""
             changeForm();
+            taskTab.display();
             newPage = "taskNav";
         }
         else if (classList.contains("starNav")) {
-            titleDiv.innerText = "Starred Tasks"
+            titleDiv.innerText = ""
             changeForm();
             newPage = "starNav"
         }
@@ -129,10 +196,15 @@ const projectTab = (() => {
 const taskTab = (() => {
     //recipe to draw taskTab
     //display entire taskList
-    //button to add new task
+    //button to add new t
 
     const display = () => {
-
+        const keys = Object.keys(siteController.getTaskList())
+        console.log(keys);
+        
+        keys.forEach((key) => {
+            displayHandler.drawTask(key)
+        })
     }
     return {
         display

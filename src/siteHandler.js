@@ -1,17 +1,20 @@
 
 const siteController = (() => {
-    const taskList =[];
+    let taskList ={};
     const projectList =[]; //cache
     const clickHandler = (event) => {
         //if event.class = nav, go to displayHandler, send event
         
     }
     const remove = (objType,id) => {
-
+        console.log(id);
+        delete taskList[id];
+        console.log(taskList);
+        
     }
     const add = (formData) => {
         let genId=makeid(7);
-        taskList.push(Task(formData[0],formData[1],formData[2],formData[3],genId));
+        taskList[genId] = Task(formData[0],formData[1],formData[2],formData[3],genId);
         return genId
         //return id to displayHandler
     }
