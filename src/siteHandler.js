@@ -30,6 +30,10 @@ const siteController = (() => {
     const modify = (objType, id, property, newContent) =>{
 
     }
+    const changeStar = (id) => {      
+        const task = taskList[id]
+        task.changeStar();
+    }
 
     const loadStorage = () => {
     //check if task obj are saved in local storage and set them to that
@@ -44,6 +48,7 @@ const siteController = (() => {
         getTaskList,
         getProjectList,
         clickHandler,
+        changeStar,
         remove,
         add,
         modify
@@ -51,7 +56,7 @@ const siteController = (() => {
 
 })()
 
-const Task = (title,project ="",dueDate, description="", id) => {
+const Task = (title,project ="",dueDate, description="", id, star = false) => {
 
     let completed = false;
     const changeTitle = (newTitle) => {
@@ -72,6 +77,16 @@ const Task = (title,project ="",dueDate, description="", id) => {
         }
         else {
             completed = true;
+        }
+    }
+    const changeStar = () => {
+        if (!star) {
+            star = true
+            console.log(star);
+            
+        }
+        else {
+            star = false
         }
     }
     const getTitle = () => {
@@ -98,6 +113,7 @@ const Task = (title,project ="",dueDate, description="", id) => {
         changeStatus,
         changeTitle,
         changeProject,
+        changeStar,
         getCompleted,
         getDescription,
         getDueDate,

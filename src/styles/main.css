@@ -15,6 +15,7 @@ body {
     margin: 0;
 }
 .hellDiv {
+	gap: 5px;
 	display: flex;
 	justify-content: space-between;
 }
@@ -69,9 +70,18 @@ img,picture,svg,video {
     }
 }
 .navTaskDiv,.projectsDiv,.addProject {
+	gap: 10px;
     display: flex;
 }
 
+.leftTaskDiv, .rightTaskDiv {
+	gap: 10px;
+	display: flex;
+	align-items: center;
+}
+.projectDescription {
+	font-weight: 600;
+}
 /* FORM STYLING IGNORE */
 .form-style-9, .taskDiv{
 	background: #FAFAFA;
@@ -147,3 +157,39 @@ img,picture,svg,video {
 	background-color: #28739E;
 }
 /* FORM STYLING IGNORE */
+
+/* Check Mark Styling */
+.checked, .checkDiv {
+	background-color: lightgray;
+    position: relative;
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+}
+.taskTitleDiv {
+	font-size: 1.3rem;
+	font-weight: bold;
+}
+.checked::before {
+    position: absolute;
+    left: 0;
+    top: 50%;
+    height: 50%;
+    width: 3px;
+    background-color: #336699;
+    content: "";
+    transform: translateX(10px) rotate(-45deg);
+    transform-origin: left bottom;
+}
+
+.checked::after {
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    height: 3px;
+    width: 100%;
+    background-color: #336699;
+    content: "";
+    transform: translateX(10px) rotate(-45deg);
+    transform-origin: left bottom;
+}

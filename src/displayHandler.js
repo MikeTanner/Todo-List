@@ -88,6 +88,19 @@ const displayHandler = (() => {
         const checkDiv = document.createElement("div")
         checkDiv.classList.add("checkDiv") 
         checkDiv.classList.add("unchecked")
+        checkDiv.addEventListener("click", (event)=> {
+            const checkBox = event.target
+            if (checkBox.classList.contains("unchecked")) {
+                checkBox.classList.remove("unchecked")
+                checkBox.classList.add("checked")
+            }
+            else {
+                checkBox.classList.remove("checked")
+                checkBox.classList.add("unchecked")
+            }
+            siteController.changeStar(event.target.parentNode.parentNode.parentNode.id);
+            event.stopPropagation();
+        })
         const titleDiv = document.createElement("div")
         titleDiv.classList.add("taskTitleDiv")        
         titleDiv.innerHTML = taskList[taskId].getTitle();
@@ -125,10 +138,13 @@ const displayHandler = (() => {
 
         if (buttonType =="Show More") {
             const description = document.createElement("div")
+            const projectName = document.createElement("div")
             description.classList.add("moreInfo")
+            projectName.classList.add("projectDescription")
             description.innerHTML = siteController.getTaskList()[targetId].getDescription()
+            projectName.innerHTML = siteController.getTaskList()[targetId].getProject()
             event.target.innerHTML = "Show Less"
-            taskTarget.append(description)   
+            taskTarget.append(projectName,description)   
         }
         else if (buttonType == "Show Less") {
             taskTarget.removeChild(taskTarget.querySelector(".moreInfo"));
