@@ -98,7 +98,7 @@ const displayHandler = (() => {
                 checkBox.classList.remove("checked")
                 checkBox.classList.add("unchecked")
             }
-            siteController.changeStar(event.target.parentNode.parentNode.parentNode.id);
+            siteController.changeStatus(event.target.parentNode.parentNode.parentNode.id);
             event.stopPropagation();
         })
         const titleDiv = document.createElement("div")
@@ -108,6 +108,24 @@ const displayHandler = (() => {
         //right div contents
         const rightDiv = document.createElement("div")
         rightDiv.classList.add("rightTaskDiv") 
+        const starBtn = document.createElement("img")
+        starBtn.classList.add("starTaskBtn")
+        if (taskList[taskId].getStar()) {
+            starBtn.classList.add("starredTask")
+        }
+        starBtn.setAttribute("src", cache["./star-face.png"])
+        starBtn.addEventListener("click", (event)=> {
+            if (starBtn.classList.contains("starredTask")) {
+                starBtn.classList.remove("starredTask")
+            }
+            else {
+                starBtn.classList.add("starredTask")
+            }
+            siteController.changeStar(event.target.parentNode.parentNode.parentNode.id);
+
+            
+        })
+
         const detailsBtn = document.createElement("button")
         detailsBtn.classList.add("detailsButton")
         detailsBtn.innerHTML="Show More"
@@ -117,7 +135,7 @@ const displayHandler = (() => {
         deleteBtn.classList.add("deleteTaskBtn")
         deleteBtn.addEventListener("click", (event)=> deleteTask(event))
         leftDiv.append(checkDiv,titleDiv);
-        rightDiv.append(detailsBtn, deleteBtn)
+        rightDiv.append(starBtn,detailsBtn, deleteBtn)
         hellDiv.append(leftDiv,rightDiv)
         taskDiv.append(hellDiv)
         content.append(taskDiv)
@@ -148,6 +166,7 @@ const displayHandler = (() => {
         }
         else if (buttonType == "Show Less") {
             taskTarget.removeChild(taskTarget.querySelector(".moreInfo"));
+            taskTarget.removeChild(taskTarget.querySelector(".projectDescription"))
             event.target.innerHTML = "Show More"
         }
 
@@ -170,6 +189,7 @@ const displayHandler = (() => {
         else if (classList.contains("starNav")) {
             titleDiv.innerText = ""
             changeForm();
+            starredTab.display();
             newPage = "starNav"
         }
         content.appendChild(titleDiv)
@@ -226,8 +246,20 @@ const taskTab = (() => {
         display
     }
 })()
+
 const starredTab = (() => {
-    //recipe to draw starredTab
+
+    const display = () => {
+        const taskList = siteController.getTaskList();
+        for (const key in taskList) {
+            if (taskList[key].getStar()) {
+                displayHandler.drawTask(taskList[key].getId())
+            }
+        }
+    }
+    return {
+        display
+    }
 })()
 const currentTab = (() => {
     //tabs: tasks, starred, a projectview

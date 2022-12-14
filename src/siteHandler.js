@@ -107,6 +107,9 @@ const Task = (title,project ="",dueDate, description="", id, star = false) => {
     const getId = () => {
         return id;
     }
+    const getStar = () => {
+        return star
+    }
     return {
         changeDescription,
         changeDueDate,
@@ -120,6 +123,7 @@ const Task = (title,project ="",dueDate, description="", id, star = false) => {
         getTitle,
         getProject,
         getId,
+        getStar,
     }
     }
 export {siteController}

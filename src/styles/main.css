@@ -19,7 +19,7 @@ body {
 	display: flex;
 	justify-content: space-between;
 }
-#tasks:hover, #starred{ 
+#tasks:hover,.starTaskBtn:hover, #starred{ 
     cursor: pointer;
 }
 header, footer, article, nav{
@@ -73,7 +73,9 @@ img,picture,svg,video {
 	gap: 10px;
     display: flex;
 }
-
+.starredTask {
+    background-color: yellow;
+}
 .leftTaskDiv, .rightTaskDiv {
 	gap: 10px;
 	display: flex;
