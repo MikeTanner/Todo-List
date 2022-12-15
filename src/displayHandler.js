@@ -61,7 +61,7 @@ const displayHandler = (() => {
                 
                 drawTask(taskId)
                 console.log("test");
-                
+                projectNavBar.update();
                 event.stopPropagation()
             }
         })
@@ -227,7 +227,41 @@ const displayHandler = (() => {
 
 
 const projectTab = (() => {
-    //recipe to draw projectTab
+
+    const create = (event) => {
+        const project = event.target.innerHTML;
+        console.log(project);
+    }
+    return {
+        create
+    }
+})()
+const projectNavBar =(() => {
+    const container = document.querySelector(".projectsDiv")
+    let projectList = siteController.getProjectList();
+    console.log(projectList);
+    
+    const update = () => {
+        clear();
+        for (const key in projectList) {
+            const projectContainer = document.createElement("div")
+            projectContainer.classList.add("projectTitleContainer")
+            const projectSymbol = document.createElement("img")
+            projectSymbol.classList.add("smallImg")
+            projectSymbol.setAttribute("src", cache["./greg.png"])
+            const projectTitle = document.createElement("p")
+            projectTitle.classList.add("projectTitle")
+            projectTitle.innerHTML = key
+            projectContainer.append(projectSymbol,projectTitle)
+            container.appendChild(projectContainer)
+            }
+        }
+    const clear = () => {
+        container.innerHTML = "";
+    }    
+    return {
+        update
+    };
 })()
 const taskTab = (() => {
     //recipe to draw taskTab

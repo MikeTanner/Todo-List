@@ -1,7 +1,7 @@
 
 const siteController = (() => {
     let taskList ={};
-    const projectList =[]; //cache
+    const projectList ={}; //cache
     const clickHandler = (event) => {
         //if event.class = nav, go to displayHandler, send event
         
@@ -15,6 +15,7 @@ const siteController = (() => {
     const add = (formData) => {
         let genId=makeid(7);
         taskList[genId] = Task(formData[0],formData[1],formData[2],formData[3],genId);
+        updateProjectList(formData[1],genId);
         return genId
         //return id to displayHandler
     }
@@ -33,6 +34,17 @@ const siteController = (() => {
     const changeStar = (id) => {      
         const task = taskList[id]
         task.changeStar();
+    }
+    const updateProjectList = (projectName,id) => {
+        if (projectName in projectList) {
+            projectList[projectName].push(id)
+        }
+        else {
+            projectList[projectName] = [id]
+        }
+        console.log(projectList);
+        
+        return;
     }
 
     const loadStorage = () => {
