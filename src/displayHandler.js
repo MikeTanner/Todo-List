@@ -70,10 +70,10 @@ const displayHandler = (() => {
     const validateFormData = () => {
         return true;
     }
-    const update = (type) => {
-        //if type = task, called tab whatever
-        //if type = project, reload project div
-        //can be called by an event listener
+    const update = (target, type) => {
+        if (type = "project") {
+            changeTab(target)
+        }
     }
     const drawTask = (taskId)=>{
         const taskList = siteController.getTaskList();
@@ -192,6 +192,13 @@ const displayHandler = (() => {
             starredTab.display();
             newPage = "starNav"
         }
+        else {
+            changeForm();
+            console.log(classList);
+            
+            projectTab.display(classList[1])
+            newPage = classList[1]
+        }
         content.appendChild(titleDiv)
         return newPage;
     }
@@ -220,6 +227,7 @@ const displayHandler = (() => {
         startup,
         update,
         drawTask,
+        update
     }
 
 })()
@@ -228,12 +236,12 @@ const displayHandler = (() => {
 
 const projectTab = (() => {
 
-    const create = (event) => {
-        const project = event.target.innerHTML;
+    const display = (project) => {
+        
         console.log(project);
     }
     return {
-        create
+        display
     }
 })()
 const projectNavBar =(() => {
@@ -246,16 +254,25 @@ const projectNavBar =(() => {
         for (const key in projectList) {
             const projectContainer = document.createElement("div")
             projectContainer.classList.add("projectTitleContainer")
+            projectContainer.classList.add(key)
             const projectSymbol = document.createElement("img")
             projectSymbol.classList.add("smallImg")
             projectSymbol.setAttribute("src", cache["./greg.png"])
             const projectTitle = document.createElement("p")
             projectTitle.classList.add("projectTitle")
             projectTitle.innerHTML = key
+            projectContainer.addEventListener("click", function(event){
+                displayHandler.update(this, "project")
+            })
+             
             projectContainer.append(projectSymbol,projectTitle)
             container.appendChild(projectContainer)
-            }
         }
+    }
+    const activateFilter =(event,key) => {
+        let IdArray = projectList[key]
+
+    }
     const clear = () => {
         container.innerHTML = "";
     }    
